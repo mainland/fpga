@@ -6,8 +6,7 @@
 //
 
 module x300_core #(
-   parameter BUS_CLK_RATE = 32'd166666666,
-   parameter FP_GPIO_WIDTH = 12
+   parameter BUS_CLK_RATE = 32'd166666666
 )(
    //Clocks and resets
    input radio_clk,
@@ -740,7 +739,7 @@ module x300_core #(
 
    genvar i;
    generate for (i=0; i<4; i=i+1) begin
-      x300_db_fe_core #( .USE_SPI_CLK(0), .CTRL_FP_GPIO_SRC(i < 1 ? 1 : 0) ) db_fe_core_i (
+      x300_db_fe_core #( .USE_SPI_CLK(0) ) db_fe_core_i (
          .clk(radio_clk), .reset(radio_rst),
          .set_stb(db_fe_set_stb[i]), .set_addr(db_fe_set_addr[i]), .set_data(db_fe_set_data[i]),
          .rb_stb(db_fe_rb_stb[i]),  .rb_addr(db_fe_rb_addr[i]), .rb_data(db_fe_rb_data[i]),
@@ -759,6 +758,8 @@ module x300_core #(
    //------------------------------------
    // Front-Panel GPIO Source Mux
    //------------------------------------
+   // Number of FP GPIO Pins
+   localparam FP_GPIO_WIDTH = 12;
 
    // for each bit in the front-panel GPIO, mux the output
    // and the direction control bit based on the mux register

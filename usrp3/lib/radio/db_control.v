@@ -48,19 +48,13 @@ module db_control #(
     .strobe(set_stb), .addr(set_addr), .in(set_data),
     .out(misc_outs), .changed());
 
-  generate
-    // front-panel GPIO mux register for architectures without
-    // a top-level settings register map; only one radio should
-    // be designated the controller for the FP GPIO mux
-    if (CTRL_FP_GPIO_SRC) begin
-      setting_reg #(.my_addr(SR_FP_GPIO_SRC), .width(32)) sr_fp_gpio_src (
-        .clk(clk), .rst(reset),
-        .strobe(set_stb), .addr(set_addr), .in(set_data),
-        .out(fp_gpio_src), .changed());
-    end else begin
-      assign fp_gpio_src = 32'b0;
-    end
-  endgenerate
+  // front-panel GPIO mux register for architectures without
+  // a top-level settings register map; only one radio should
+  // be designated the controller for the FP GPIO mux
+  setting_reg #(.my_addr(SR_FP_GPIO_SRC), .width(32), .at_reset(0)) sr_fp_gpio_src (
+    .clk(clk), .rst(reset),
+    .strobe(set_stb), .addr(set_addr), .in(set_data),
+    .out(fp_gpio_src), .changed());
 
   // Readback
   reg spi_readback_stb_hold;

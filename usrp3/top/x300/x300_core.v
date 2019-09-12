@@ -348,7 +348,7 @@ module x300_core #(
       .ddr3_axi_rst           (ddr3_axi_rst),
       // Slave Interface Write Address Ports
       .ddr3_axi_awid          ({s01_axi_awid, s00_axi_awid}),
-      .ddr3_axi_awaddr        ({s01_axi_awaddr[29:0], s00_axi_awaddr[29:0]}),
+      .ddr3_axi_awaddr        ({s01_axi_awaddr, s00_axi_awaddr}),
       .ddr3_axi_awlen         ({s01_axi_awlen, s00_axi_awlen}),
       .ddr3_axi_awsize        ({s01_axi_awsize, s00_axi_awsize}),
       .ddr3_axi_awburst       ({s01_axi_awburst, s00_axi_awburst}),
@@ -371,7 +371,7 @@ module x300_core #(
       .ddr3_axi_bready        ({s01_axi_bready, s00_axi_bready}),
       // Slave Interface Read Address Ports
       .ddr3_axi_arid          ({s01_axi_arid, s00_axi_arid}),
-      .ddr3_axi_araddr        ({s01_axi_araddr[29:0], s00_axi_araddr[29:0]}),
+      .ddr3_axi_araddr        ({s01_axi_araddr, s00_axi_araddr}),
       .ddr3_axi_arlen         ({s01_axi_arlen, s00_axi_arlen}),
       .ddr3_axi_arsize        ({s01_axi_arsize, s00_axi_arsize}),
       .ddr3_axi_arburst       ({s01_axi_arburst, s00_axi_arburst}),
